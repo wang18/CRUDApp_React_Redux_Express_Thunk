@@ -11,13 +11,9 @@ class GamePage extends Component {
     }
     render(){
         return(
-            <div className="gamePage container">
-                <div className="row">
-                    <div className="col-md-4 col-md-offset-4">
+            <div className="ui container">
                         <h1>Game List</h1>
                         <GamesList games={this.props.games}/>
-                    </div>
-                </div>
             </div>);
     }
 }
