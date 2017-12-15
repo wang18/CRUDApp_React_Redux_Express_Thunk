@@ -10,7 +10,7 @@ import thunk from 'redux-thunk';
 import {Provider} from 'react-redux';
 import {BrowserRouter,Route,Switch}from 'react-router-dom';
 import GamesPage from './components/game_page';
-import GameForm from './components/game_form';
+import GameFormPage from './components/game_form_page';
 
 
 
@@ -26,9 +26,9 @@ ReactDOM.render(<Provider store={store}>
                         <div>
                             <App/>
                             <Switch>
-                                <Route path="/games/new" component={GameForm}/>
+                                <Route path="/games/new" component={GameFormPage}/>
                                 <Route path="/games" component={GamesPage}/>
-                                <Route path="/game/:_id" component={GameForm}/>
+                                <Route path="/game/:_id" component={GameFormPage}/>
 
                             </Switch>
                         </div>

@@ -1,4 +1,4 @@
-import {FETCH_GAMES, SET_GAMES, ADD_GAME, GAME_FETCHED} from './type_constants';
+import {FETCH_GAMES, SET_GAMES, ADD_GAME, GAME_FETCHED,GAME_UPDATED, GAME_DELETED} from './type_constants';
 
 export function setGames(games) {
     return{
@@ -44,6 +44,26 @@ export function saveGame(data) {
     }
 }
 
+export function gameUpdated(game) {
+    return {
+        type: GAME_UPDATED,
+        game
+    }
+}
+
+export function updateGame(data){
+    return dispatch =>{
+        return fetch(`/api/games/${data._id}`,{
+            method: 'put',
+            body:JSON.stringify(data),
+            headers:{
+                "Content-Type":"application/json"
+            }
+        }).then(handleResponse)
+            .then(data => dispatch(gameUpdated(data.game)));
+    }
+}
+
 export function gameFetched(game) {
     return {
         type: GAME_FETCHED,
@@ -58,3 +78,49 @@ export function fetchGame(id) {
             .then(data => dispatch(gameFetched(data.game)));
     }
 }
+
+export function gameDeleted(gameId) {
+    return{
+        type: GAME_DELETED,
+        gameId
+    }
+}
+
+export function deleteGame(id){
+    return dispatch => {
+        return fetch(`/api/games/${id}`,{
+            method: 'delete',
+            headers:{
+                "Content-Type": "application/json"
+            }
+        }).then(handleResponse)
+            .then(data => dispatch(gameDeleted(id)));
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

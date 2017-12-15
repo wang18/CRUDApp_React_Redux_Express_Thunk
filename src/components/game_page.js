@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
 import GamesList from './games_list';
-import {fetchGames} from '../actions/action_games';
+import {fetchGames, deleteGame} from '../actions/action_games';
 import {bindActionCreators} from 'redux';
 
 class GamePage extends Component {
@@ -13,14 +13,15 @@ class GamePage extends Component {
         return(
             <div className="ui container">
                         <h1>Game List</h1>
-                        <GamesList games={this.props.games}/>
+                        <GamesList games={this.props.games} deleteGame={this.props.deleteGame}/>
             </div>);
     }
 }
 
 GamePage.propTypes = {
     games: PropTypes.array.isRequired,
-    fetchGames: PropTypes.func.isRequired
+    fetchGames: PropTypes.func.isRequired,
+    deleteGame: PropTypes.func.isRequired
 }
 
 const mapStateToProps=(state)=>{
@@ -30,7 +31,7 @@ const mapStateToProps=(state)=>{
 }
 
 const mapDispatchToProps=(dispatch)=>{
-    return bindActionCreators({fetchGames}, dispatch);
+    return bindActionCreators({fetchGames,deleteGame}, dispatch);
 }
 
 export default connect(mapStateToProps,mapDispatchToProps)(GamePage);

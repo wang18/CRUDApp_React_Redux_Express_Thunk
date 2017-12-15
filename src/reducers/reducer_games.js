@@ -1,4 +1,4 @@
-import {SET_GAMES,ADD_GAME,GAME_FETCHED} from '../actions/type_constants';
+import {SET_GAMES,ADD_GAME,GAME_FETCHED, GAME_UPDATED, GAME_DELETED} from '../actions/type_constants';
 
 export default function games(state=[], action={}) {
     switch(action.type){
@@ -21,6 +21,15 @@ export default function games(state=[], action={}) {
                     action.game
                 ];
             }
+        case GAME_UPDATED:
+            return state.map(item => {
+                if(item._id===action.game._id){
+                    return action.game;
+                }
+                return item;
+            });
+        case GAME_DELETED:
+            return state.filter((item) => item._id !== action.gameId);
         default:
             return state;
     }
